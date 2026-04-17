@@ -134,4 +134,11 @@ The final step was to collect the flag in the root directory. My first attempt a
 nathan is not in the sudoers file.  This incident will be reported.
 ~~~
 
-Not good! With this action I've left a serious trace of my presence in this machine and if it were connected to an enterprise network with an IR team they would surely investigate this incident very quickly. 
+Not good! With this action I've left a serious trace of my presence in this machine and if this were a real-time attack could lead to me being booted off the network before any work could be done. At this point I needed a push to continue progressing so I consulted the official HTB writeup to see where I might go next. In the writeup they used the LinPEAS (Linux Privilege Escalation Awesome) Script to enumerate the machine and look for privilege escalation vectors. LinPEAS was a new tool to me so I needed to take some time to learn how it works and how to use it. 
+
+The first step was to download linpeas onto my machine so I could host it on a web server that I can reach while ssh'd into the HTB machine.
+
+Start the web server with the linpeas.sh file using my VPN tunnel ip: 
+~~~
+sudo python3 -m http.server 80
+~~~
