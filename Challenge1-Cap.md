@@ -77,3 +77,61 @@ Examining this packet capture revealed an interaction with the ftp service open 
 User: nathan
 Pass: Buck3tH4TF0RM3!
 ~~~
+
+With these credentials I was able to confirm the ability to access FTP and more importantly, I was able to use them to successfully SSH into the machine with the following command:
+
+~~~
+ssh nathan@10.129.38.183
+
+Response:
+nathan@10.129.38.183's password:
+
+Buck3tH4TF0RM3!
+
+Response:
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri Apr 17 18:11:10 UTC 2026
+
+  System load:           0.08
+  Usage of /:            36.7% of 8.73GB
+  Memory usage:          20%
+  Swap usage:            0%
+  Processes:             222
+  Users logged in:       0
+  IPv4 address for eth0: 10.129.38.183
+  IPv6 address for eth0: dead:beef::250:56ff:feb0:4f1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+63 updates can be applied immediately.
+42 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Thu May 27 11:21:27 2021 from 10.10.14.7
+~~~
+
+At this point I had access to nathan's home directory and the first flag for this machine.
+
+~~~
+788f2ff82fedabf0806514a4e5cf3627
+~~~
+
+The final step was to collect the flag in the root directory. My first attempt at this was to simply navigate to the root directory with cd, but was met with a permissions error. My next thought was to use sudo cd to use elevated privileges to access the root directory. Unfortunately, this did not work as I was met with the following message:
+
+~~~
+nathan is not in the sudoers file.  This incident will be reported.
+~~~
+
+Not good! With this action I've left a serious trace of my presence in this machine and if it were connected to an enterprise network with an IR team they would surely investigate this incident very quickly. 
